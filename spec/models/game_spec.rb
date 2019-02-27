@@ -4,7 +4,6 @@ require 'securerandom'
 RSpec.describe Game do
   let(:game) { Game.new() }
 
-  # TODO: Reorganize tests into method descriptions
   it 'exists' do
     expect(game).to be_a(Game)
   end
@@ -23,8 +22,8 @@ RSpec.describe Game do
   end
 
   it 'can be pulled from cache with the UUID' do
-    uncached = Game.uncache(game.uuid)
-    expect(uncached).to eq(game)
+    loaded = Game.load_game(game.uuid)
+    expect(loaded).to eq(game)
   end
 
   context "instance methods" do

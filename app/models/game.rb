@@ -37,12 +37,16 @@ class Game
   end
 
   def self.find_or_create(uuid = nil)
-    return uncache(uuid) if uuid && uncache(uuid)
+    return load_game(uuid) if uuid && load_game(uuid)
     return self.new
   end
 
-  def self.uncache(uuid)
+  def self.load_game(uuid)
     Rails.cache.read(uuid)
+  end
+
+  def delete
+    Rails.cache.delete(self.uuid)
   end
 
   def ==(game)

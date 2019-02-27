@@ -8,7 +8,9 @@ class ApplicationController < ActionController::Base
   end
 
   def new_game
-    session['game_id'] = nil
-    current_game
+    current_game.delete
+    @current_game = Game.new
+    session['game_id'] = @current_game.uuid
+    return @current_game
   end
 end
