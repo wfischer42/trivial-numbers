@@ -7,5 +7,11 @@ class GameController < ApplicationController
   end
 
   def answer
+    @game = current_game
+  end
+
+  private
+  def choice
+    params.require("choice")
   end
 end

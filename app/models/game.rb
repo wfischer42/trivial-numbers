@@ -1,17 +1,17 @@
 require 'securerandom'
 
 class Game
-  attr_reader :score, :uuid
+  attr_reader :score, :uuid, :number_fact
   def initialize()
     @score = 0
     @uuid = SecureRandom.uuid
-    Rails.cache.write(@uuid, self)
+    @number_fact ||=  NumberFact.fetch
+    Rails.cache.fetch(@uuid){ self }
   end
 
   def question
     @number_fact || new_number_fact
     question = "Guess " + @number_fact.fact + "."
-    # question.slice(0,1).capitalize + question.slice(1..-1)
   end
 
   def choices(number = 4)

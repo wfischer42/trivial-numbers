@@ -5,10 +5,12 @@
     <%= @game.question %>
   </div>
   <div id="options">
-    <% @game.choices.each do |choice| %>
-      <div>
-        <%= choice %>
-      </div>
+
+    <%= form_tag do %>
+      <% @game.choices.each do |choice| %>
+        <input type="radio" name="choice" value='<%= choice %>'> <%= choice %><br>
+      <% end %>
+      <input type="submit" name="submit" value="final answer" disabled>
     <% end %>
   </div>
 </div>
