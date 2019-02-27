@@ -4,14 +4,14 @@
     <title>TrivialNumbers</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <div id="top-bar">
-      <h1>Trivial Numbers</h1>
+      <h1><span class="white">Trivial</span>  <span class="red">Numbers</span></h1>
     </div>
     <%= yield %>
   </body>
