@@ -8,10 +8,10 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/ruby:2.4.1-node-browsers
-      # - image: circleci/postgres:9.6.2-alpine
-      #   environment:
-      #     POSTGRES_USER: root
-      #     POSTGRES_DB:
+      - image: circleci/postgres:9.6.2-alpine
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: trivial-numbers_test
       - image: redis
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -40,9 +40,9 @@ jobs:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
-      # Database setup
-      # - run: bundle exec rake db:create
-      # - run: bundle exec rake db:schema:load
+      Database setup
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
 
       # run tests!
       - run:
