@@ -5,7 +5,11 @@
     <%= @game.question %>
   </div>
   <div id="options">
-    
+    <% @game.choices.each do |choice| %>
+      <div>
+        <%= choice %>
+      </div>
+    <% end %>
   </div>
 </div>
 

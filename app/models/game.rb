@@ -9,9 +9,25 @@ class Game
   end
 
   def question
-    type = ['trivia', 'date'].sample
-    binding.pry
-    @question ||= NumberService
+    @number_fact || new_number_fact
+    question = @number_fact.fact + ":"
+    question.slice(0,1).capitalize + question.slice(1..-1)
+  end
+
+  def choices(number = 4)
+    @number_fact || new_number_fact
+    answer = @number_fact.subject
+    range = ((answer * 0.25)..((answer + 10) * 1.75))
+    choices = [answer]
+    while choices.length < number do
+      choice = rand(range).round
+      choices << choice unless choices.include?(choice)
+    end
+    choices.shuffle
+  end
+
+  def new_number_fact
+    @number_fact = NumberFact.fetch()
   end
 
   def self.find_or_create(uuid = nil)

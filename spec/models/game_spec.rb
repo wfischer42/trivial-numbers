@@ -4,7 +4,7 @@ require 'securerandom'
 RSpec.describe Game do
   let(:game) { Game.new() }
 
-  # TODO: Reorganize tests
+  # TODO: Reorganize tests into method descriptions
   it 'exists' do
     expect(game).to be_a(Game)
   end
@@ -27,7 +27,30 @@ RSpec.describe Game do
     expect(uncached).to eq(game)
   end
 
-  context "Class methods" do
+  context "instance methods" do
+    describe "question" do
+      it "returns a question" do
+        number_fact = double("NumberFact", fact: "the number of months in a year")
+        expect(NumberFact).to receive(:fetch).and_return(number_fact)
+        question = game.question
+        expect(number_fact).to have_received(:fact)
+        expect(question).to eq("The number of months in a year:")
+      end
+    end
+
+    describe "choices" do
+      it "returns a set of 4 choices" do
+        number_fact = double("NumberFact", subject: 12)
+        expect(NumberFact).to receive(:fetch).and_return(number_fact)
+        choices = game.choices
+        expect(number_fact).to have_received(:subject)
+        expect(choices).to include(12)
+        expect(choices.length).to eq(4)
+      end
+    end
+  end
+
+  context "class methods" do
     describe '.find_or_create(uuid)' do
       it 'creates new game for nil input' do
         new_game = Game.find_or_create(nil)
