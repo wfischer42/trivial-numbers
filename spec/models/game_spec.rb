@@ -34,7 +34,7 @@ RSpec.describe Game do
         expect(NumberFact).to receive(:fetch).and_return(number_fact)
         question = game.question
         expect(number_fact).to have_received(:fact)
-        expect(question).to eq("The number of months in a year:")
+        expect(question).to eq("Guess the number of months in a year.")
       end
     end
 

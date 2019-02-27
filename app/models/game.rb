@@ -10,8 +10,8 @@ class Game
 
   def question
     @number_fact || new_number_fact
-    question = @number_fact.fact + ":"
-    question.slice(0,1).capitalize + question.slice(1..-1)
+    question = "Guess " + @number_fact.fact + "."
+    # question.slice(0,1).capitalize + question.slice(1..-1)
   end
 
   def choices(number = 4)
@@ -27,7 +27,7 @@ class Game
   end
 
   def new_number_fact
-    @number_fact = NumberFact.fetch()
+    @number_fact = NumberFact.fetch
   end
 
   def self.find_or_create(uuid = nil)

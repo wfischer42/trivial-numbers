@@ -23,6 +23,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 gem 'redis-rails'
+gem 'faraday'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
@@ -45,6 +46,8 @@ group :development, :test do
   gem 'pry'
   gem 'simplecov', require: false
   gem 'capybara'
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do

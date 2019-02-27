@@ -10,6 +10,7 @@ class NumberFact
   def self.fetch
     json = NumberService.new.get_random
     new(json)
+
   end
 
 end

@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'securerandom'
 
 RSpec.describe NumberFact do
   let!(:json) do
