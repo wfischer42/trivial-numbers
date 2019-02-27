@@ -28,10 +28,14 @@ RSpec.describe Game do
   end
 
   context "instance methods" do
+    let(:number_fact) do
+      double("NumberFact", fact: "the number of months in a year", subject: 12)
+    end
+
     describe "question" do
       it "returns a question" do
-        number_fact = double("NumberFact", fact: "the number of months in a year")
         expect(NumberFact).to receive(:fetch).and_return(number_fact)
+        allow(Rails.cache).to receive(:write)
         question = game.question
         expect(number_fact).to have_received(:fact)
         expect(question).to eq("Guess the number of months in a year.")
@@ -40,12 +44,35 @@ RSpec.describe Game do
 
     describe "choices" do
       it "returns a set of 4 choices" do
-        number_fact = double("NumberFact", subject: 12)
         expect(NumberFact).to receive(:fetch).and_return(number_fact)
+        allow(Rails.cache).to receive(:write)
         choices = game.choices
         expect(number_fact).to have_received(:subject)
         expect(choices).to include(12)
         expect(choices.length).to eq(4)
+      end
+    end
+
+    describe "register_guess" do
+      before do
+        allow(NumberFact).to receive(:fetch).and_return(number_fact)
+        allow(Rails.cache).to receive(:write)
+        game.new_number_fact
+      end
+
+      it "increments score for a correct guess" do
+        game.register_guess(12)
+        expect(game.score).to eq(100)
+      end
+
+      it "decrements score for an incorrect guess" do
+        game.register_guess(11)
+        expect(game.score).to eq(-50)
+      end
+
+      it "resets the question" do
+        expect(NumberFact).to receive(:fetch).and_return(number_fact)
+        game.register_guess(12)
       end
     end
   end

@@ -5,7 +5,6 @@ class Game
   def initialize()
     @score = 0
     @uuid = SecureRandom.uuid
-    @number_fact ||=  NumberFact.fetch
     Rails.cache.fetch(@uuid){ self }
   end
 
@@ -26,8 +25,15 @@ class Game
     choices.shuffle
   end
 
+  def register_guess(guess)
+    increase_score if guess.to_i == @number_fact.subject
+    decrease_score if guess.to_i != @number_fact.subject
+    new_number_fact
+  end
+
   def new_number_fact
     @number_fact = NumberFact.fetch
+    Rails.cache.write(@uuid, self)
   end
 
   def self.find_or_create(uuid = nil)
@@ -42,6 +48,16 @@ class Game
   def self.uncache(uuid)
     Rails.cache.read(uuid)
   end
+
+  private
+
+    def increase_score
+      @score += 100
+    end
+
+    def decrease_score
+      @score -= 50
+    end
 
   # def hash
   #   @uuid.hash
