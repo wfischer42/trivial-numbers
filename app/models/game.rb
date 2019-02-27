@@ -41,12 +41,12 @@ class Game
     return self.new
   end
 
-  def ==(game)
-    @uuid == game.uuid
-  end
-
   def self.uncache(uuid)
     Rails.cache.read(uuid)
+  end
+
+  def ==(game)
+    @uuid == game.uuid
   end
 
   private
@@ -58,8 +58,4 @@ class Game
     def decrease_score
       @score -= 50
     end
-
-  # def hash
-  #   @uuid.hash
-  # end
 end

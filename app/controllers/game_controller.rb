@@ -1,5 +1,7 @@
 class GameController < ApplicationController
   def new
+    @game = new_game
+    render "question"
   end
 
   def question

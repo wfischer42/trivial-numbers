@@ -57,4 +57,13 @@ RSpec.feature 'The Game:', type: :feature do
       expect(page).to_not have_content('Guess the Guinness World Record for the most languages a poem was recited in.')
     end
   end
+
+  describe "Player resetting the game" do
+    it "sees a new question and the score reset to zero" do
+      choose(option: '146')
+      click_button "final answer", disabled: true
+      click_button "start over"
+      expect(page).to have_content('Score: 0')
+    end
+  end
 end
