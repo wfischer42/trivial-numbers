@@ -8,6 +8,8 @@ class GameController < ApplicationController
 
   def answer
     @game = current_game
+    @game.register_guess(choice)
+    render "question"
   end
 
   private
