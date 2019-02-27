@@ -1,0 +1,20 @@
+
+<div id="gameboard">
+
+  <div id="question">
+    <%= @game.question %>
+  </div>
+  <div id="options">
+
+    <%= form_tag do %>
+      <% @game.choices.each do |choice| %>
+        <input type="radio" name="choice" value='<%= choice %>'> <%= choice %><br>
+      <% end %>
+      <input type="submit" name="submit" value="final answer" disabled>
+    <% end %>
+  </div>
+</div>
+
+<div id="score-card">
+  Score: <%= @game.score %>
+</div>
