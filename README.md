@@ -1,3 +1,5 @@
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/wfischer42/trivial-numbers.svg?columns=all)](https://waffle.io/wfischer42/trivial-numbers)[![CircleCI](https://circleci.com/gh/wfischer42/trivial-numbers.svg?style=svg)](https://circleci.com/gh/wfischer42/trivial-numbers)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
